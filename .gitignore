@@ -1,0 +1,6 @@
+*.o
+*.pyc
+*.c
+*.so
+*.egg
+seq_string_algo.egg-info/*
