@@ -13,7 +13,7 @@ ffi.cdef("""
 	int compare_remainders_lexicographically(const void * a, const void * b);
 """)
 
-ffi.set_source("_example", """
+ffi.set_source("seq_string_algo._suffix_array", """
 	#include <stdlib.h>
 	struct arr_pos
 	{
@@ -54,25 +54,4 @@ ffi.set_source("_example", """
 
 
 ffi.compile(verbose=True)
-from _example import lib
-def build_order(sequence_of_longs):
-	arr = ffi.new("long[%d]" % len(sequence_of_longs))
-	order = ffi.new("long[%d]" % len(sequence_of_longs))
-	for i in xrange(len(arr)):
-		arr[i] = sequence_of_longs[i]
-	
-	lib.find_ordering(arr, len(sequence_of_longs), order)
-	result = []
-	for i in xrange(len(arr)):
-		result.append(order[i])
-	return result
-
-
-
-
-
-arr = [1,2,3,5,1,2,1,3,4,2,3,1,3,1,2,2,1,2,3,4,1,2]
-order = build_order(arr)
-for index in order:
-	print arr[index:]
 
